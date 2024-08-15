@@ -159,9 +159,16 @@ Load Balancer created by the Nginx-Ingress-Controller
 
 We will be installing prometheus and grafana through one helm chart that works for both then we configure them and access the grafana dashboard.
 
--Install prometheus repo with the following command:
+- Download prometheus repo with the following command:
 
     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
     helm repo update
 
 ![prom-repo](./images/prometheus-repo.png)
+
+- Install Prometheus from the repo
+
+![prom-install](./images/prometheus-install.png)
+
+- Update `Ingress file` to include prometheus and grafana hosts and then create A - records for the host name so we can access both
+
