@@ -172,3 +172,9 @@ We will be installing prometheus and grafana through one helm chart that works f
 
 - Update `Ingress file` to include prometheus and grafana hosts and then create A - records for the host name so we can access both
 
+- Prometheus Interface
+
+![prom-interface](./images/prometheus-interface.png)
+
+- grafana Dashboard
+
