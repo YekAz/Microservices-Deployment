@@ -113,4 +113,55 @@ The aim of this project is to set up the Socks Shop application, a demonstration
 
     helm create app
 
-![helm-app-created]()
+![helm-app-created](./images/chart-install.png)
+
+Ingress is also deployed.
+
+![ingress-deploy](./images/ingress-deploy.png)
+
+Pods and Services
+![pods-and-serv](./images/pods-and-services.png)
+
+# Step 4:
+### Serving of front-end service.
+
+Since we used a host based ingress, we would be able to access our front-end service through the host name defined in our ingress file: `sock.yekinniazeez.tech`
+
+- Firstly, we would download the Nginx-Ingress-Controller repo using Helm and then install it.
+
+Run the command to download the ingress controller repo:
+
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    helm repo update
+
+![nginx-ingreee-repo](./images/nginx-ingress-repo.png)
+     
+Run the command to install Nginx-Ingress-Controller:
+
+    helm install ingress ingress-nginx/ingress-nginx
+
+![ingress-controller-install](./images/ingress-controller-install.png)
+
+Load Balancer created by the Nginx-Ingress-Controller
+
+![load-balancer](./images/load-balancer.png)
+
+- Then, we will create an A - record for our host name on AWS Route-53 that will point to the load balancer that would be created by the ingress controller.
+
+![A-record](./images/A-record.png)
+
+- I can now access the front-end service through the host-name: `socks.yekinniazeez.tech`
+
+![front-end]()
+
+# Step 5:
+### Configure Prometheus and Grafana
+
+We will be installing prometheus and grafana through one helm chart that works for both then we configure them and access the grafana dashboard.
+
+-Install prometheus repo with the following command:
+
+    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+    helm repo update
+
+![prom-repo](./images/prometheus-repo.png)
