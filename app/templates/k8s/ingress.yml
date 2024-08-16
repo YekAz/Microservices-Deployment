@@ -3,49 +3,96 @@ kind: Ingress
 metadata:
   name: sockshop-ingress
   namespace: sock-shop
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"  # Use the ClusterIssuer you created
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"    # Redirect HTTP to HTTPS
 spec:
   ingressClassName: nginx
   rules:
     - host: socks.yekinniazeez.tech
       http:
         paths:
-          - pathType: Prefix
+          - path: /
+            pathType: Prefix
             backend:
               service:
                 name: front-end
                 port:
                   number: 80
-            path: /
     - host: prometheus.yekinniazeez.tech
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: prometheus-kube-prometheus-prometheus
-              port:
-                number: 9090
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus-kube-prometheus-prometheus
+                port:
+                  number: 9090
     - host: grafana.yekinniazeez.tech
       http:
         paths:
-        - path: /
-          pathType: Prefix
-          backend:
-            service:
-              name: prometheus-grafana
-              port:
-                number: 80
-    # - host: alertmanager.yekinniazeez.tech
-    #   http:
-    #     paths:
-    #     - path: /
-    #       pathType: Prefix
-    #       backend:
-    #         service:
-    #           name: prometheus-kube-prometheus-alertmanager
-    #           port:
-    #             number: 9093
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prometheus-grafana
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - socks.yekinniazeez.tech
+      secretName: socks-tls  # Secret name for the TLS certificate
+    - hosts:
+        - prometheus.yekinniazeez.tech
+      secretName: prometheus-tls  # Secret name for the TLS certificate
+    - hosts:
+        - grafana.yekinniazeez.tech
+      secretName: grafana-tls  # Secret name for the TLS certificate
+
+
+
+
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: sockshop-ingress
+#   namespace: sock-shop
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#     - host: socks.yekinniazeez.tech
+#       http:
+#         paths:
+#           - pathType: Prefix
+#             backend:
+#               service:
+#                 name: front-end
+#                 port:
+#                   number: 80
+#             path: /
+#     - host: prometheus.yekinniazeez.tech
+#       http:
+#         paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: prometheus-kube-prometheus-prometheus
+#               port:
+#                 number: 9090
+#     - host: grafana.yekinniazeez.tech
+#       http:
+#         paths:
+#         - path: /
+#           pathType: Prefix
+#           backend:
+#             service:
+#               name: prometheus-grafana
+#               port:
+#                 number: 80
+  
 
             
     # This section is only required if TLS is to be enabled for the Ingress
