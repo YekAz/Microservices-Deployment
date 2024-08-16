@@ -194,4 +194,64 @@ We will be installing prometheus and grafana through one helm chart that works f
 
 - Create a `cluster-issuer.yml` file
 
-    
+    apiVersion: cert-manager.io/v1
+        kind: ClusterIssuer
+        metadata:
+    name: letsencrypt-prod
+        spec:
+        acme:
+            # The ACME server URL for Let's Encrypt production
+            server: https://acme-v02.api.letsencrypt.org/directory
+            # Email address for notifications about certificate expiry, etc.
+            email: yekinniazeez.cloud@gmail.com
+            # Secret to store the ACME account private key
+            privateKeySecretRef:
+            name: letsencrypt-prod
+            # Use the HTTP-01 challenge mechanism
+            solvers:
+            - http01:
+                ingress:
+                class: nginx
+
+- Apply the `cluster-issuer.yml` file:
+
+    kubectl apply -f cluster-issuer.yml
+
+- Update ingress file to enable TLS encryption using Cert-Manager
+
+- Apply the update ingress file
+
+- Verify Certificate issuance:
+
+Verify Certificate for the front-end service `(socks.yekinniazeez.tech)`:
+
+    kubectl describe certificate socks-tls -n sock-shop
+
+![cert](./images/frontend-cert.png)
+
+Verify Certificate for the prometheus service `(prometheus.yekinniazeez.tech)`:
+
+    kubectl describe certificate prometheus-tls -n sock-shop
+
+![cert](./images/prom-cert.png)
+
+Verify Certificate for the grafana service `(grafan.yekinniazeez.tech)`:
+
+    kubectl describe certificate grafana-tls -n sock-shop
+![cert](./images/grafana-cert.png)
+
+#### Services are noe encrypted and can be accessd with:
+
+- https://socks.yekinniazeez.tech
+
+![socks](./images/frontend-https.png)
+---
+
+- https://prometheus.yekinniazeez.tech
+
+![prom](./images/prom-https.png)
+---
+
+- https://grafana.yekinniazeez.tech
+
+![graf](./images/grafana-https.png)
