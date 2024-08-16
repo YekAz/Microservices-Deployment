@@ -104,14 +104,24 @@ The aim of this project is to set up the Socks Shop application, a demonstration
 
 - Run the following command to retrieve the access credentials for your cluster and configure kubectl.
     
-    aws eks --region $(terraform output -raw region) update-kubeconfig \
+    ```aws eks --region $(terraform output -raw region) update-kubeconfig \
     --name $(terraform output -raw cluster_name)
+    ```
 
 ![kubectl config](./images/kubectl-conect.png)
 
 - Run the command below to create the helm application:
 
+    ```
     helm create app
+    ```
+- Then move the deployment file and ingress files into the `template` folder
+
+- Then deploy the microservices with the command:
+
+    ```
+    helm install sockshop-app ./app
+    ```
 
 ![helm-app-created](./images/chart-install.png)
 
