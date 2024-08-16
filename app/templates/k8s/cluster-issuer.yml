@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    # The ACME server URL for Let's Encrypt production
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # Email address for notifications about certificate expiry, etc.
+    email: yekinniazeez.cloud@gmail.com
+    # Secret to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    # Use the HTTP-01 challenge mechanism
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
