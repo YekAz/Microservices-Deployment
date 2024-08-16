@@ -104,7 +104,8 @@ The aim of this project is to set up the Socks Shop application, a demonstration
 
 - Run the following command to retrieve the access credentials for your cluster and configure kubectl.
     
-    ```aws eks --region $(terraform output -raw region) update-kubeconfig \
+    ```
+    aws eks --region $(terraform output -raw region) update-kubeconfig \
     --name $(terraform output -raw cluster_name)
     ```
 
@@ -171,8 +172,10 @@ We will be installing prometheus and grafana through one helm chart that works f
 
 - Download prometheus repo with the following command:
 
+    ```
     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
     helm repo update
+    ```
 
 ![prom-repo](./images/prometheus-repo.png)
 
