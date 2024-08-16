@@ -178,3 +178,16 @@ We will be installing prometheus and grafana through one helm chart that works f
 
 - grafana Dashboard
 
+![grafana](./images/grafana-dasboard.png)
+---
+
+![grafana](./images/grafana-dashboard3.png)
+
+# Step 6:
+### Encryption
+
+- Add the Helm repo
+![]()
+
+- Install Cert Manager
+![]()
