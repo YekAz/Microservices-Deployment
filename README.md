@@ -186,8 +186,12 @@ We will be installing prometheus and grafana through one helm chart that works f
 # Step 6:
 ### Encryption
 
-- Add the Helm repo
-![]()
+- Add the Helm Jetstack repo for Cert Manager
+![jetstack](./images/jetstack-repo.png)
 
-- Install Cert Manager
-![]()
+- Install the Cert Manager
+![cert-manager](./images/cert-manager-install.png)
+
+- Create a `cluster-issuer.yml` file
+
+    
