@@ -1,4 +1,9 @@
 # DEPLOYMENT OF A MICROSERVICE APPLICATION ON KUBERNETES USING TERRAFORM AS IaaC
+---
+
+![arch-diagram](./images/arch-diagram.png)
+
+---
 
 ## Project Overview: 
 
@@ -163,7 +168,7 @@ Load Balancer created by the Nginx-Ingress-Controller
 
 - I can now access the front-end service through the host-name: `socks.yekinniazeez.tech`
 
-![front-end]()
+![front-end](./images/frontend.png)
 
 # Step 5:
 ### Configure Prometheus and Grafana
